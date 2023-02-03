@@ -33,11 +33,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.assignment_outlined),
                 activeIcon: Icon(Icons.assignment),
-                label: 'Schedule'),
+                label: 'PYQs'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.notes),
                 activeIcon: Icon(Icons.note_sharp),
-                label: 'Schedule'),
+                label: 'Notes'),
           ]),
     );
   }
