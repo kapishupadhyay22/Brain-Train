@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'landingscreen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -11,9 +10,44 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   var index = 0;
+  var screens = [
+    LandingScreen(),
+    const Scaffold(
+      body: Center(
+        child: Text("Schedule"),
+      ),
+    ),
+    const Scaffold(
+      body: Center(
+        child: Text("Marked"),
+      ),
+    ),
+    const Scaffold(
+      body: Center(
+        child: Text("PYQs"),
+      ),
+    ),
+    const Scaffold(
+      body: Center(
+        child: Text("Notes"),
+      ),
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Stack(
+        children: screens
+            .asMap()
+            .map((i, screen) => MapEntry(
+                i,
+                Offstage(
+                  offstage: index != i,
+                  child: screen,
+                )))
+            .values
+            .toList(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
           onTap: (value) => setState(() {
@@ -21,6 +55,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
               }),
           type: BottomNavigationBarType.fixed,
           items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                activeIcon: Icon(Icons.home),
+                label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(IconData(0xe122, fontFamily: 'MaterialIcons')),
                 activeIcon:
